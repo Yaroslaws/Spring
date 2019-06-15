@@ -18,6 +18,8 @@ public class Message {
     private String text;
     private String tag;
 
+    private User autohr;
+
     public Message(){
 
     }
@@ -41,5 +43,21 @@ public class Message {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public User getAutohr() {
+        return autohr;
+    }
+
+    public void setAutohr(User autohr) {
+        this.autohr = autohr;
     }
 }
