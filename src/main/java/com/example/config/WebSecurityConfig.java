@@ -16,11 +16,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/registration").permitAll()
+                    .antMatchers("/", "/registration","/h2-console/**" ).permitAll()
+                .and()
+                    .authorizeRequests().antMatchers("/console/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
@@ -29,6 +32,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .logout()
                     .permitAll();
+
+
+//        http.csrf().disable();
+//        http.headers().frameOptions().disable();
     }
 
     @Override
