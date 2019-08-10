@@ -17,8 +17,11 @@ import java.util.Map;
 @Controller
 public class MainController {
 
-    @Autowired
-    private MessageRepo messagesRepo;
+    private final MessageRepo messagesRepo;
+
+    public MainController(MessageRepo messagesRepo) {
+        this.messagesRepo = messagesRepo;
+    }
 
     @GetMapping("/")
     public String greeting(
@@ -30,10 +33,22 @@ public class MainController {
     }
 
     @GetMapping("/main")
-    public String main(Map<String, Object> model) {
-        Iterable<Message> messages = messagesRepo.findAll();
+    public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
+        Iterable<Message> messages;
 
-        model.put("messages", messages);
+
+        if(filter != null && !filter.isEmpty())
+        {
+            messages = messagesRepo.findByTag(filter);
+        }
+        else
+        {
+            messages = messagesRepo.findAll();
+        }
+
+        model.addAttribute("messages", messages);
+        model.addAttribute("filter", filter);
+
         return "main";
     }
 
@@ -51,25 +66,6 @@ public class MainController {
         return "main";
 
 
-    }
-
-    @PostMapping("filter")
-    public String filter(@RequestParam String filter, Map<String, Object> model){
-
-        Iterable<Message> messages;
-
-        if(filter != null && !filter.isEmpty())
-        {
-            messages = messagesRepo.findByTag(filter);
-        }
-        else
-        {
-            messages = messagesRepo.findAll();
-        }
-
-        model.put("messages", messages);
-
-        return "main";
     }
 
 }
