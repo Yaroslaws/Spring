@@ -1,6 +1,5 @@
 package com.example;
 
-import com.example.domain.Message;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
