@@ -39,12 +39,10 @@ public class RegistrationController {
     public String activate(Model model, @PathVariable String code) {
         boolean isActivated = userService.activateUser(code);
 
-        if(isActivated) {
+        if (isActivated) {
             model.addAttribute("message", "Pirate success activated");
-        }
-        else
-        {
-            model.addAttribute("message", "Pirate is not found" );
+        } else {
+            model.addAttribute("message", "Pirate is not found");
         }
 
         return "login";

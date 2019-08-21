@@ -31,8 +31,8 @@ public class MainController {
 
     @GetMapping("/")
     public String greeting(
-            @RequestParam(name="name", required=false, defaultValue="World") String name,
-            Map<String,Object> model
+            @RequestParam(name = "name", required = false, defaultValue = "World") String name,
+            Map<String, Object> model
     ) {
         model.put("name", name);
         return "greeting";
@@ -43,12 +43,9 @@ public class MainController {
         Iterable<Message> messages;
 
 
-        if(filter != null && !filter.isEmpty())
-        {
+        if (filter != null && !filter.isEmpty()) {
             messages = messagesRepo.findByTag(filter);
-        }
-        else
-        {
+        } else {
             messages = messagesRepo.findAll();
         }
 
@@ -62,10 +59,10 @@ public class MainController {
     public String add(
             @AuthenticationPrincipal User user,
             @RequestParam String text,
-            @RequestParam String tag,Map<String, Object> model,
+            @RequestParam String tag, Map<String, Object> model,
             @RequestParam("file") MultipartFile file) throws IOException {
 
-        Message message = new Message(text,tag,user);
+        Message message = new Message(text, tag, user);
 
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);

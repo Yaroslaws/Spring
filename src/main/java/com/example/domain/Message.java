@@ -1,14 +1,13 @@
 package com.example.domain;
 
 
-
 import javax.persistence.*;
 
 
 @Entity
 public class Message {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String tag;
     private String text;
