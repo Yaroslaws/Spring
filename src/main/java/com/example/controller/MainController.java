@@ -46,7 +46,7 @@ public class MainController {
         model.addAttribute("messages", messages);
         model.addAttribute("filter", filter);
 
-        return "mainController";
+        return "main";
     }
 
     @PostMapping("/main")
@@ -60,7 +60,8 @@ public class MainController {
         message.setAuthor(user);
 
         if (bindingResult.hasErrors()) {
-            System.out.println("No No No");
+            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
+            model.mergeAttributes(errorsMap);
             model.addAttribute("message", message);
         } else {
             if (file != null && !file.getOriginalFilename().isEmpty()) {
@@ -87,6 +88,6 @@ public class MainController {
 
         model.addAttribute("messages", messages);
 
-        return "mainController";
+        return "main";
     }
 }

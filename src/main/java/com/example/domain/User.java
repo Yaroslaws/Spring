@@ -21,9 +21,7 @@ public class User implements UserDetails {
     private String username;
     @NotBlank(message = "Password cannot be void")
     private String password;
-    @Transient
-    @NotBlank(message = "Password confirmation not correct")
-    private String password2;
+
     private boolean active;
 
     @Email(message = "Email is not correct")
@@ -127,11 +125,4 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public String getPassword2() {
-        return password2;
-    }
-
-    public void setPassword2(String password2) {
-        this.password2 = password2;
-    }
 }
