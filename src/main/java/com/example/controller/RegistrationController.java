@@ -42,13 +42,21 @@ public class RegistrationController {
 
         boolean isConfirmIsEmpty = StringUtils.isEmpty(passwordConfig);
 
-        if (isConfirmIsEmpty) {
-            model.addAttribute("password2Error", "Password conform cannot be empty");
-        }
 
-        if (user.getPassword() != null && !user.getPassword().equals(passwordConfig)) {
+        if(StringUtils.isEmpty(user.getUsername())) {
+            model.addAttribute("usernameError", "Enter username");
+        }
+        else if (user.getPassword() != null && !user.getPassword().equals(passwordConfig)) {
             model.addAttribute("passwordError", "Password are different");
         }
+        else if (StringUtils.isEmpty(user.getEmail())) {
+            model.addAttribute("emailError", "Enter email");
+        }
+
+        else if (StringUtils.isEmpty(user.getPassword())) {
+            model.addAttribute("passwordError", "Password conform cannot be empty");
+        }
+
 
         if (isConfirmIsEmpty || bindingResult.hasErrors()) {
             return "registration";
